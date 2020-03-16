@@ -17,8 +17,11 @@ public class UserHibernateDao implements UserDaoI {
 
     @Override
     public List<User> getAllUsers() throws HibernateException {
-        Query query = session.createQuery("from User");
-        return query.list();
+        session.beginTransaction();
+        List<User> users = session.createQuery("from User").list();
+        session.getTransaction().commit();
+        session.clear();
+        return users;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class UserHibernateDao implements UserDaoI {
     @Override
     public void editUser(User user) throws HibernateException {
         Transaction trx = session.beginTransaction();
-        session.update(user);
+        session.merge(user);
         trx.commit();
     }
 

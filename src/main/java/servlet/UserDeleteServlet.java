@@ -1,7 +1,7 @@
 package servlet;
 
+import service.UserService;
 import service.UserServiceI;
-import service.UserServiceHibernate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +17,7 @@ public class UserDeleteServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-//        userService = new UserServiceJdbc();
-        userService = UserServiceHibernate.getInstance();
+        userService = new UserService(false);
     }
 
     @Override

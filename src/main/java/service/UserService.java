@@ -1,24 +1,31 @@
 package service;
 
+import dao.UserDaoI;
+import dao.UserHibernateDao;
 import dao.UserJdbcDao;
 import model.User;
+import org.hibernate.SessionFactory;
 import util.DbUtil;
 
 import java.sql.Connection;
 import java.util.List;
 
-public class UserServiceJdbc implements UserServiceI {
+public class UserService implements UserServiceI {
 
-    private UserJdbcDao userDao;
+    private UserDaoI userDao;
 
-    public UserServiceJdbc() {
-        try {
-            Connection connection = DbUtil.getInstance().getMysqlConnection();
-            this.userDao = new UserJdbcDao(connection);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public UserService(boolean isJDBC) {
+        if (isJDBC) {
+            try {
+                Connection connection = DbUtil.getInstance().getMysqlConnection();
+                this.userDao = new UserJdbcDao(connection);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
+        else {
+            this.userDao = new UserHibernateDao(DbUtil.getSessionFactory().openSession());
+        }
     }
 
     @Override
