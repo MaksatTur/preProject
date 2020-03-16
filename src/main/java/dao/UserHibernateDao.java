@@ -45,6 +45,8 @@ public class UserHibernateDao implements UserDaoI {
 
     @Override
     public void addUser(User user) throws HibernateException {
+        Transaction trx = session.beginTransaction();
         session.save(user);
+        trx.commit();
     }
 }
