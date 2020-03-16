@@ -1,18 +1,17 @@
 package service;
 
 import dao.UserJdbcDao;
-import interfaces.UserDao;
 import model.User;
 import util.DbUtil;
 
 import java.sql.Connection;
 import java.util.List;
 
-public class UserService implements interfaces.UserService {
+public class UserServiceJdbc implements UserServiceI {
 
     private UserJdbcDao userDao;
 
-    public UserService() {
+    public UserServiceJdbc() {
         try {
             Connection connection = DbUtil.getInstance().getMysqlConnection();
             this.userDao = new UserJdbcDao(connection);

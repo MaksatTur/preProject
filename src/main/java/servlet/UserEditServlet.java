@@ -1,7 +1,8 @@
 package servlet;
 
+import service.UserServiceI;
 import model.User;
-import service.UserService;
+import service.UserServiceHibernate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,12 +16,13 @@ import java.util.Date;
 
 @WebServlet("/edit")
 public class UserEditServlet extends HttpServlet {
-    private UserService userService;
+    private UserServiceI userService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        userService = new UserService();
+//        userService = new UserServiceJdbc();
+        userService = UserServiceHibernate.getInstance();
     }
 
     @Override
