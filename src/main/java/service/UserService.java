@@ -14,18 +14,14 @@ public class UserService implements UserServiceI {
 
     private UserDaoI userDao;
 
-    public UserService(boolean isJDBC) {
-        if (isJDBC) {
-            try {
-                Connection connection = DbUtil.getInstance().getMysqlConnection();
-                this.userDao = new UserJdbcDao(connection);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public UserService() {
+        try {
+            Connection connection = DbUtil.getInstance().getMysqlConnection();
+            this.userDao = new UserJdbcDao(connection);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else {
-            this.userDao = new UserHibernateDao(DbUtil.getSessionFactory().openSession());
-        }
+//            this.userDao = new UserHibernateDao(DbUtil.getSessionFactory().openSession());
     }
 
     @Override

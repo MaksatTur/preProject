@@ -17,7 +17,7 @@ public class UserDeleteServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        userService = new UserService(false);
+        userService = new UserService();
     }
 
     @Override
