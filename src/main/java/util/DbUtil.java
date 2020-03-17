@@ -34,17 +34,25 @@ public class DbUtil {
                     append("3306/").
                     append("task1?").
                     append("serverTimezone=Asia/Bishkek");
-            return DriverManager. getConnection(url.toString(), "root", "root");
+            return DriverManager.getConnection(url.toString(), "root", "root");
         } catch (SQLException e) {
             throw new Exception(e);
         }
     }
 
-    public static SessionFactory getSessionFactory() {
+    public SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             sessionFactory = createSessionFactory();
         }
         return sessionFactory;
+    }
+
+    private static SessionFactory createSessionFactory() {
+        Configuration configuration = getMySqlConfiguration();
+        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
+        builder.applySettings(configuration.getProperties());
+        ServiceRegistry serviceRegistry = builder.build();
+        return configuration.buildSessionFactory(serviceRegistry);
     }
 
     private static Configuration getMySqlConfiguration() {
@@ -60,13 +68,5 @@ public class DbUtil {
         configuration.setProperty("hibernate.show_sql", "true");
         configuration.setProperty("hibernate.hbm2ddl.auto", "validate");
         return configuration;
-    }
-
-    private static SessionFactory createSessionFactory() {
-        Configuration configuration = getMySqlConfiguration();
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
-        return configuration.buildSessionFactory(serviceRegistry);
     }
 }

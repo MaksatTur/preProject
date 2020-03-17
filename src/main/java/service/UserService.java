@@ -1,5 +1,6 @@
 package service;
 
+import dao.UserDaoFactory;
 import dao.UserDaoI;
 import dao.UserHibernateDao;
 import dao.UserJdbcDao;
@@ -7,21 +8,28 @@ import model.User;
 import org.hibernate.SessionFactory;
 import util.DbUtil;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
 public class UserService implements UserServiceI {
-
+    private static UserService instance;
     private UserDaoI userDao;
 
-    public UserService() {
+    private UserService() {
         try {
-            Connection connection = DbUtil.getInstance().getMysqlConnection();
-            this.userDao = new UserJdbcDao(connection);
+            UserDaoFactory userDaoFactory = new UserDaoFactory();
+            userDao = userDaoFactory.getUserDao();
         } catch (Exception e) {
             e.printStackTrace();
         }
-//            this.userDao = new UserHibernateDao(DbUtil.getSessionFactory().openSession());
+    }
+
+    public static UserService getInstance() {
+        if (instance == null) {
+            instance = new UserService();
+        }
+        return instance;
     }
 
     @Override
