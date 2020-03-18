@@ -1,7 +1,7 @@
 package servlet;
 
+import service.Service;
 import service.UserService;
-import service.UserServiceI;
 import model.User;
 
 import javax.servlet.ServletException;
@@ -14,12 +14,12 @@ import java.util.List;
 
 @WebServlet("/list")
 public class MainServlet extends HttpServlet {
-    private UserServiceI userService;
+    private UserService userService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        userService = UserService.getInstance();
+        userService = Service.getInstance();
     }
 
     @Override

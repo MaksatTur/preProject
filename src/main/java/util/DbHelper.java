@@ -1,30 +1,26 @@
 package util;
 
 import model.User;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbUtil {
-    private static DbUtil instance;
-    private static SessionFactory sessionFactory;
+public class DbHelper {
+    private static DbHelper instance;
 
-    private DbUtil() {
+    private DbHelper() {
     }
 
-    public static DbUtil getInstance() {
+    public static DbHelper getInstance() {
         if (instance == null) {
-            instance = new DbUtil();
+            instance = new DbHelper();
         }
         return instance;
     }
 
-    public Connection getMysqlConnection() throws Exception {
+    public Connection getConnection() throws Exception {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             StringBuilder url = new StringBuilder();
@@ -40,22 +36,7 @@ public class DbUtil {
         }
     }
 
-    public SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            sessionFactory = createSessionFactory();
-        }
-        return sessionFactory;
-    }
-
-    private static SessionFactory createSessionFactory() {
-        Configuration configuration = getMySqlConfiguration();
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
-        return configuration.buildSessionFactory(serviceRegistry);
-    }
-
-    private static Configuration getMySqlConfiguration() {
+    public Configuration getConfiguration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
 

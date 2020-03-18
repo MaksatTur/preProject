@@ -1,6 +1,6 @@
 package dao;
 
-import util.DbUtil;
+import util.DbHelper;
 
 import java.io.*;
 import java.util.Properties;
@@ -12,14 +12,14 @@ public class UserDaoFactory {
     public UserDaoFactory() throws IOException {
     }
 
-    public UserDaoI getUserDao() throws Exception {
-        UserDaoI userDao = null;
+    public UserDao getUserDao() throws Exception {
+        UserDao userDao = null;
         switch (daoType) {
             case "UserJdbcDao":
-                userDao = new UserJdbcDao(DbUtil.getInstance().getMysqlConnection());
+                userDao = new UserJdbcDao(DbHelper.getInstance().getConnection());
                 break;
             case "UserHibernateDao":
-                userDao = new UserHibernateDao(DbUtil.getInstance().getSessionFactory().openSession());
+                userDao = new UserHibernateDao();
         }
         return userDao;
     }

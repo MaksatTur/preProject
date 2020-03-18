@@ -4,7 +4,7 @@ import model.User;
 
 import java.util.List;
 
-public interface UserDaoI {
+public interface UserDao {
     List<User> getAllUsers();
     void deleteUserById(long id);
     void editUser(User user);
