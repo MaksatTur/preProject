@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="users", catalog = "task1")
+@Table(name = "users", catalog = "task1")
 public class User {
 
     @Id
@@ -24,22 +24,37 @@ public class User {
     @Column(name = "passport")
     private String passport;
 
+    @Column(name = "role")
+    private String role;
+
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "password")
+    private String password;
+
     public User() {
     }
 
-    public User(long id, String name, String surname, Date dateOfBirth, String passport) {
+    public User(long id, String name, String surname, Date dateOfBirth, String passport, String role, String login, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.passport = passport;
+        this.role = role;
+        this.login = login;
+        this.password = password;
     }
 
-    public User(String name, String surname, Date dateOfBirth, String passport) {
+    public User(String name, String surname, Date dateOfBirth, String passport, String role, String login, String password) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.passport = passport;
+        this.role = role;
+        this.login = login;
+        this.password = password;
     }
 
     public long getId() {
@@ -74,11 +89,35 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public String getPassport() {
         return passport;
     }
 
     public void setPassport(String passport) {
         this.passport = passport;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

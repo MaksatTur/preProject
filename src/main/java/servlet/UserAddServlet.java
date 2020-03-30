@@ -14,7 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet("/add")
+@WebServlet("/admin/add")
 public class UserAddServlet extends HttpServlet {
     private UserService userService;
 
@@ -36,6 +36,9 @@ public class UserAddServlet extends HttpServlet {
         String surname = req.getParameter("surname");
         String dateOfBirthStr = req.getParameter("dateOfBirth");
         String passport = req.getParameter("passport");
+        String role = req.getParameter("role");
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
         Date date = null;
         try {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(dateOfBirthStr);
@@ -44,12 +47,10 @@ public class UserAddServlet extends HttpServlet {
         }
 
         if (validateUserData(name, surname, date, passport)) {
-            User user = new User(name, surname,
-                    date,
-                    passport);
+            User user = new User(name, surname, date, passport, role, login, password);
             userService.addUser(user);
         }
-        resp.sendRedirect("/list");
+        resp.sendRedirect("/admin");
     }
 
     private boolean validateUserData(String name, String surname, Date birthDate, String passport) {

@@ -10,4 +10,5 @@ public interface UserDao {
     void editUser(User user);
     User getUserById(long id);
     void addUser(User user);
+    User login(String login, String password);
 }

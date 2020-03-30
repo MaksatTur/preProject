@@ -50,4 +50,9 @@ public class Service implements UserService {
     public void addUser(User user) {
         userDao.addUser(user);
     }
+
+    @Override
+    public User login(String login, String password) {
+        return userDao.login(login, password);
+    }
 }

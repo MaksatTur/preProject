@@ -1,10 +1,7 @@
 package dao;
 
 import model.User;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -73,5 +70,21 @@ public class UserHibernateDao implements UserDao {
         session.save(user);
         trx.commit();
         session.close();
+    }
+
+    @Override
+    public User login(String login, String password) {
+        User user = null;
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from User where login = :login and password = :password");
+        query.setString("login", login);
+        query.setString("password", password);
+        query.setMaxResults(1);
+        List<User> users = query.list();
+        session.close();
+        if (!users.isEmpty()){
+            user = users.get(0);
+        }
+        return user;
     }
 }

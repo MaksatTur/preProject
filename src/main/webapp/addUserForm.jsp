@@ -9,13 +9,13 @@
 <div style="text-align: center;">
     <h1>Упраление пользователями</h1>
     <h2>
-        <a href="/add">Добавить пользователя</a>
+        <a href="/admin/add">Добавить пользователя</a>
         &nbsp;&nbsp;&nbsp;
-        <a href="/list">Все пользователи</a>
+        <a href="/admin">Все пользователи</a>
     </h2>
 </div>
 <div align="center">
-    <form action="add" method="post">
+    <form action="/admin/add" method="post">
         <table border="1" cellpadding="5">
             <caption>
                 <h2>
@@ -45,6 +45,27 @@
                 <th>Паспортные данные:</th>
                 <td>
                     <input type="text" name="passport" size="15" value=""/>
+                </td>
+            </tr>
+            <tr>
+                <th>Роль:</th>
+                <td>
+                    <select name="role">
+                        <option value="admin">Админ</option>
+                        <option value="user">Пользователь</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Логин:</th>
+                <td>
+                    <input type="text" name="login" size="15" value=""/>
+                </td>
+            </tr>
+            <tr>
+                <th>Пароль:</th>
+                <td>
+                    <input type="password" name="password" size="15" value=""/>
                 </td>
             </tr>
             <tr>
