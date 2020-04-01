@@ -20,6 +20,9 @@ public class UserDaoFactory {
                 break;
             case "UserHibernateDao":
                 userDao = new UserHibernateDao();
+                break;
+            default:
+                userDao = new UserHibernateDao();
         }
         return userDao;
     }
