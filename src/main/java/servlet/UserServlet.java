@@ -15,6 +15,6 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
         req.setAttribute("user", user);
-        req.getRequestDispatcher("/user.jsp").forward(req,resp);
+        req.getRequestDispatcher("/user.jsp").forward(req, resp);
     }
 }

@@ -6,11 +6,11 @@ import model.User;
 
 import java.util.List;
 
-public class Service implements UserService {
-    private static Service instance;
+public class UserServiceImpl implements UserService {
+    private static UserServiceImpl instance;
     private UserDao userDao;
 
-    private Service() {
+    private UserServiceImpl() {
         try {
             UserDaoFactory userDaoFactory = new UserDaoFactory();
             userDao = userDaoFactory.getUserDao();
@@ -19,9 +19,9 @@ public class Service implements UserService {
         }
     }
 
-    public static Service getInstance() {
+    public static UserServiceImpl getInstance() {
         if (instance == null) {
-            instance = new Service();
+            instance = new UserServiceImpl();
         }
         return instance;
     }

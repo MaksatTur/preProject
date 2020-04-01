@@ -1,6 +1,6 @@
 package servlet;
 
-import service.Service;
+import service.UserServiceImpl;
 import service.UserService;
 import model.User;
 
@@ -20,8 +20,7 @@ public class UserEditServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        super.init();
-        userService = Service.getInstance();
+        userService = UserServiceImpl.getInstance();
     }
 
     @Override

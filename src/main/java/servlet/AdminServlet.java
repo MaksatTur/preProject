@@ -1,7 +1,7 @@
 package servlet;
 
 import model.User;
-import service.Service;
+import service.UserServiceImpl;
 import service.UserService;
 
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        userService = Service.getInstance();
+        userService = UserServiceImpl.getInstance();
     }
 
     @Override
